@@ -1,0 +1,155 @@
+%---------------------------------------------------------------------
+\section{MRAC direto para plantas de grau relativo 2}
+
+Uma das principais hipóteses utilizadas na demonstração de estabilidade do algoritmo MRAC direto para plantas de $n^* = 1$ é a 
+necessidade do modelo de referencia escolhido ser uma função de transferência SPR. Isto é necessário para que a lei de adaptação 
+seja formulada como função apenas do erro de estimação do sistema.
+%
+Para o algoritmo do MRAC direto para plantas de maior grau relativo, não é possível escolher um modelo de referência $M(s)$ que 
+seja SPR. Portanto, Monopoli \cite{} propôs um método para estender o algoritmo MRAC direto para $n^* = 2$, que consiste em escolher 
+um polinômio $L(s) = s+\alpha$ tal que $M(s)\,L(s)$ seja SPR.
+
+A estrutura do controlador é idêntica ao caso $n^* = 1$, cujo diagrama em blocos foi repetido aqui para maior clareza:
+%
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{figs/mrac.pdf}
+  \caption{Estrutura MRAC.}
+  \label{mrac} 
+\end{figure}
+
+O algoritmo de adaptação resultante, bem como a prova de estabilidade do mesmo são muito parecidos com o caso $n^* = 1$, e serão otimidos aqui por conveniência. A idéia básica consiste em utilizar os sinais $\chi = L^{-1}\,u$ como um novo controle e o regressor filtrado $\zeta = L^{-1}\,\omega$ como um novo regressor para o sistema.
+%
+Assim, é possível mostrar que a lei de adaptação 
+%
+\begin{equation}
+\dot{\theta}(t) = -\textrm{sign}[k_p] \, \Gamma \, \zeta(t) \, e(t),
+\label{eq:adaptation}
+\end{equation}
+%
+em conjunto com a lei de controle 
+%
+\begin{equation}
+u(t) = \theta^\intercal\omega + \dot{\theta}^\intercal\omega
+\label{eq:control}
+\end{equation}
+%
+garantem a estabilidade assintótica dos erros de estimação e saída do sistema realimentado. Note que o sinal $\dot{\theta}$ presente em \eqref{eq:control} pode ser implementado na prática devido à sua definição na lei de adaptação \eqref{eq:adaptation}. Substituindo \eqref{eq:adaptation} em \eqref{eq:control}, a forma completa da lei de controle é dada por:
+
+\begin{equation}
+u(t) = \theta^\intercal\omega - \textrm{sign}[k_p] \, \Gamma \, e(t) \, \zeta^{\intercal}\omega
+\label{eq:control2}
+\end{equation}
+
+Neste trabalho, serão consideradas plantas de segunda e terceira ordens com grau
+relativo 2 ($n^*=2$). Iremos simular e discutir o comportamento do erro e das
+saídas para variações das condições iniciais dos parâmetros estimados
+($\theta(0)$) e da planta ($y(0)$), do ganho de adaptação $\Gamma$ e para
+diferentes parâmetros da planta e modelo.
+
+%Considere um sistema linear invariante no tempo descrito pela equação
+%diferencial (Eq. \ref{eq:planta}):
+%%
+%\begin{equation}
+%P(s) \, [y](t) = Z(s) \, [u](t),
+%\label{eq:planta}
+%\end{equation}
+%
+%onde $y(t) \in \mathbb{R}$ e $u(t) \in \mathbb{R}$ são os sinais medidos de
+%saída e entrada do sistema, sendo:
+%%
+%\begin{gather}
+%P(s) = s^n + p_{n-1}s^{n-1}+\ldots + p_1s+p_0\,\\
+%Z(s) = z_ms^m + z_{m-1}s^{m-1}+\ldots + z_1s+z_0 \,,
+%\label{eq:poly}
+%\end{gather}
+%%
+%os polinômios em $s$, com $s$ sendo o operador de diferencial
+%$s[x](t)=\dot{x}(t)$. $p_i$, $i = 0,1,\ldots,n-1$ e $z_i$, $i=0,1,\ldots,m$ ($n>m$) são os parâmetros desconhecidos da planta.
+%
+%O objetivo do controle é: dado um modelo de referência, descrito como
+%
+%\begin{equation}
+%P_m(s)[y_m](t) = r(t),
+%\end{equation}
+%
+%onde $P_m(s)$ é um polinômio estável mônico e $r(t)$ é a entrada de referência
+%limitada, encontrar uma lei de controle $u(t)$ tal que todo o sistema de malha
+%fechada produza sinais limitados e a saída da planta $y(t)$ rastreie o modelo
+%de referência $y_m(t)$ assintoticamente. A estrutura exige algumas premissas:
+%\begin{enumerate}
+  %\item $Z(s)$ é um polinômio estável (planta é de fase mínima);
+  %\item O sinal de $k_p$ é conhecido;
+  %\item O grau relativo da planta é conhecido;
+  %\item A ordem da planta é conhecida.
+	%\item O modelo de referencia é dado por uma função de transferência SPR.
+%\end{enumerate}
+%
+%A estrutura do controlador é 2DOF, como pode ser visto na figura
+%\ref{mrac}. Escolhe-se então um polinômio estável $\Lambda(s) =
+%s^n+\lambda_{n-1}s^{n-1}+\ldots+\lambda_1s+\lambda_0$ para filtrar a entrada e a
+%saída da planta com o filtro $\frac{1}{\Lambda(s)}$. A equação do controlador
+%é descrita como:
+%\begin{equation}
+%u(t) = \theta_1^\intercal\omega_1(t)+\theta_2^\intercal\omega_2(t)+\theta_n
+%y(t)+ \theta_{2n} r(t),
+%\end{equation}
+%
+%onde o filtro é descrito pela realização de estados:
+%
+%\begin{gather}
+%\dot{\omega}_1(t) = A_\lambda \, \omega_1(t) + bu(t)\,,\\
+%\dot{\omega}_2(t) = A_\lambda \, \omega_2(t) + by(t)\,,
+%\label{eq:statespace}
+%\end{gather}
+%%
+%onde $\omega_1(t) \in \mathbb{R}^n$, $\omega_2(t) \in \mathbb{R}^n$ e:
+%%
+%\begin{equation}
+%A_\lambda = 
+%\begin{bmatrix}
+    %0      & 1      & 0      & \dots  & 0      & 0      \\
+    %0      & 0      & 1      & 0      & \dots  & 0      \\
+    %\vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+    %0      & 0      & \dots  & \dots  & 0      & 1      \\
+    %-\lambda_0 & -\lambda_1 & \dots & \dots & -\lambda_{n-2} & -\lambda_{n-1} 
+%\end{bmatrix}
+%\in \mathbb{R}^{n \times n} \,, \quad b =
+%\begin{bmatrix}
+    %0  \\
+    %\vdots  \\
+    %0 \\
+    %1 \\ 
+%\end{bmatrix}
+%\in \mathbb{R}^n \,.
+%\label{eq:statespace}
+%\end{equation}
+%
+%\begin{figure}[H]
+  %\centering
+  %\includegraphics[width=15cm]{figs/mrac.pdf}
+  %\caption{Estrutura MRAC.}
+  %\label{mrac} 
+%\end{figure}
+%
+%Os valores ideais para o controle $\theta^*$ podem ser obtidos como já
+%descrito no trabalho 4, se os parâmetros da planta fossem conhecidos. Como não é
+%o caso, consideramos $\theta$ como uma estimativa dos parämetros ideais e
+%formulamos a lei de controle:
+%
+%\begin{gather}
+%u(t) = \theta^\intercal\omega, \\
+%\omega(t) = \left[\omega_1(t)^\intercal \quad y(t) \quad \omega_2(t)^\intercal
+%\quad r(t)\right]^\intercal, \\
+%\theta = \left[\theta_1 \quad \theta_n \quad \theta_2 \quad \theta_{2n}\right]
+%\end{gather}
+%
+%Definindo o erro como $e(t) = y(t) - y_m(t)$, é possível demonstrar por
+%Lyapunov que, variando $\theta$ através da lei de adaptação
+%
+%\begin{equation}
+%\dot{\theta}(t) = -\textrm{sign}[k_p] \, \Gamma \, \omega(t) \, e(t),
+%\end{equation}
+%%
+%o erro converge assintoticamente para zero, quando $\Gamma =
+%\Gamma^\intercal > 0$ é uma matriz de ganhos positiva definida.
