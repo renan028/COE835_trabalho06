@@ -9,20 +9,22 @@
 %          np = 4     Adaptive parameters
 %
 %======================================================================
+function dx=mrac(t,x)
 
-function dx=mrac326(t,x)
+global Ay By Aym Bym Auf Buf Ayf Byf Ao Bo kp gamma w A gP gPm;
 
-global Ay By Aym Bym Auf Buf Ayf Byf Ao Bo kp gamma w A Pg Pmg Lg thetag;
-
-y      = x(1:Pg);
-ym     = x(Pg+1:Pg+Pmg);
-uf     = x(Pg+Pmg+1:Pg+Pmg+Lg);
-yf     = x(Pg+Pmg+Lg+1:Pg+Pmg+Lg+Lg);
-theta  = x(Pg+Pmg+Lg+Lg+1:Pg+Pmg+Lg+Lg+thetag);
-zeta = x(Pg+Pmg+Lg+Lg+thetag+1:end);
+y      = x(1:gP);
+ym     = x(gP+1:gP+gPm);
+uf     = x(gP+gPm+1:gP+gPm+gP-1);
+yf     = x(gP+gPm+gP:gP+gPm+gP-1+gP-1);
+theta  = x(gP+gPm+gP-1+gP:gP+gPm+gP-1+gP-1+2*gP);
+zeta   = x(gP+gPm+gP-1+gP-1+2*gP+1:end);
 
 %--------------------------
-r = A(1)*sin(w(1)*t) + A(2)*sin(w(2)*t) + A(3)*sin(w(3)*t);
+r = 0;
+for i=1:gP
+    r = r + A(i)*sin(w(i)*t);
+end
 
 omega = [uf' y(1) yf' r]';
 e  = y(1) - ym(1);
@@ -30,19 +32,19 @@ dtheta = -sign(kp)*gamma*zeta*e;
 
 u = theta'*omega + dtheta'*zeta;
 
-%------- Cálculo de y --------
+%------- Calculo de y --------
 dy = Ay*y + By*u;
 
-%------- Cálculo de ym --------
+%------- Calculo de ym --------
 dym = Aym*ym + Bym*r;
 
-%------- Cálculo de uf --------
+%------- Calculo de uf --------
 duf = Auf*uf + Buf*u;
 
-%------- Cálculo de yf --------
+%------- Calculo de yf --------
 dyf = Ayf*yf + Byf*y(1);
 
-%------- Cálculo de zeta --------
+%------- Calculo de zeta --------
 dzeta = Ao*zeta + Bo*omega;
 
 %--------------------------
