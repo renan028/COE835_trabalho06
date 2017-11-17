@@ -9,7 +9,8 @@
 %          np = 4     Adaptive parameters
 %
 %======================================================================
-function dx=mrac224(t,x)
+
+function dx=mrac326(t,x)
 
 global Ay By Aym Bym Auf Buf Ayf Byf Ao Bo kp gamma w A Pg Pmg Lg thetag;
 
@@ -21,7 +22,7 @@ theta  = x(Pg+Pmg+Lg+Lg+1:Pg+Pmg+Lg+Lg+thetag);
 zeta = x(Pg+Pmg+Lg+Lg+thetag+1:end);
 
 %--------------------------
-r = A(1)*sin(w(1)*t) + A(2)*sin(w(2)*t);
+r = A(1)*sin(w(1)*t) + A(2)*sin(w(2)*t) + A(3)*sin(w(3)*t);
 
 omega = [uf' y(1) yf' r]';
 e  = y(1) - ym(1);
@@ -43,8 +44,6 @@ dyf = Ayf*yf + Byf*y(1);
 
 %------- Cálculo de zeta --------
 dzeta = Ao*zeta + Bo*omega;
-
-
 
 %--------------------------
 dx = [dy' dym' duf' dyf' dtheta' dzeta']';    %Translation
