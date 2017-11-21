@@ -15,10 +15,10 @@ global Ay By Aym Bym Auf Buf Ayf Byf Ao Bo kp gamma w A gP gPm;
 
 y      = x(1:gP);
 ym     = x(gP+1:gP+gPm);
-uf     = x(gP+gPm+1:gP+gPm+gP-1);
-yf     = x(gP+gPm+gP:gP+gPm+gP-1+gP-1);
-theta  = x(gP+gPm+gP-1+gP:gP+gPm+gP-1+gP-1+2*gP);
-zeta   = x(gP+gPm+gP-1+gP-1+2*gP+1:end);
+uf     = x(gP+gPm+1:2*gP+gPm-1);
+yf     = x(2*gP+gPm:3*gP+gPm-2);
+theta  = x(3*gP+gPm-1:5*gP+gPm-2);
+zeta   = x(5*gP+gPm-1:end);
 
 %--------------------------
 r = 0;

@@ -19,6 +19,8 @@ A(2) = 25;
 
 %Observer
 A0 = tf([1 1],[1]);
+
+%Monopoli multiplier
 Li = [1 1.5];
 
 %--------------- First set of parameters ----------------
@@ -38,7 +40,7 @@ Pm_1 = tf(km_1*Nm_1,Dm_1);
 gPm_1 = length(Dm_1)-1;
 
 %Initial conditions
-y0_1  = zeros(gP_1,1);
+y0_1  = 0;
 
 %Adaptation gain
 gamma_1 = 100;
@@ -60,12 +62,12 @@ Pm_2 = tf(km_2*Nm_2,Dm_2);
 gPm_2 = length(Dm_2)-1;
 
 %Initial conditions
-y0_2  = 10*ones(gP_2,1);
+y0_2  = 10;
 
 %Adaptation gain
 gamma_2 = 10;
 
-run sim.m;
+run sim_mrac.m;
 
 %% 3rd order system
 
@@ -100,7 +102,7 @@ Pm_1 = tf(km_1*Nm_1,Dm_1);
 gPm_1 = length(Dm_1)-1;
 
 %Initial conditions
-y0_1  = zeros(gP_1,1);
+y0_1  = 0;
 
 %Adaptation gain
 gamma_1 = 250;
@@ -122,9 +124,9 @@ Pm_2 = tf(km_2*Nm_2,Dm_2);
 gPm_2 = length(Dm_2)-1;
 
 %Initial conditions
-y0_2  = 10*ones(gP_2,1);
+y0_2  = 10;
 
 %Adaptation gain
 gamma_2 = 100;
 
-run sim.m;
+run sim_mrac.m;

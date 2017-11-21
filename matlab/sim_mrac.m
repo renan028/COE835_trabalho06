@@ -12,7 +12,7 @@
 %                                                        30/abr/13, Rio
 %----------------------------------------------------------------------
 
-global Ay By Aym Bym Auf Buf Ayf Byf kp gamma w A gP gPm;
+global Ay By Aym Bym Auf Buf Ayf Byf Ao Bo kp gamma w A gP gPm;
 
 sim_str = strcat('sim0',num2str(gP_1),'_');
 % options = odeset('OutputFcn','odeplot');
@@ -50,7 +50,7 @@ Ao = ss_o.A';
 Bo = ss_o.C';
 
 % Initialization
-y0  = y0_1;
+y0 = y0_1*ones(gP,1);
 ym0 = zeros(gPm,1);
 uf0 = zeros(gP-1,1);
 yf0 = zeros(gP-1,1);
@@ -62,16 +62,16 @@ init = [y0' ym0' uf0' yf0' theta0' zeta0']';
 gamma = gamma_1*eye(2*gP);
 
 % Simulation
-[T_1,X_1] = ode23s('mrac',tfinal,init,'');
+[T_1,X_1] = ode23s('mrac',tfinal,init,options);
 
 y_1      = X_1(:,1);
 ym_1     = X_1(:,gP + 1);
-theta_1 =  X_1(:,3*gP + gPm - 1:gP+gPm+gP-1+gP-1+2*gP);
+theta_1 =  X_1(:,3*gP+gPm-1:5*gP+gPm-2);
 tiltheta_1 = theta_1 - thetas.*ones(length(theta_1),2*gP);
 modtt_1 = sqrt(sum(theta_1.^2,2));
 e0_1 =  y_1 - ym_1;
 r_1 = 0;
-for i=1:gP
+for i=1:length(A)
     r_1 = r_1 + A(i)*sin(w(i).*T_1);
 end
 
@@ -113,7 +113,7 @@ Ao = ss_o.A';
 Bo = ss_o.C';
 
 % Initialization
-y0  = y0_1;
+y0 = y0_1*ones(gP,1);
 ym0 = zeros(gPm,1);
 uf0 = zeros(gP-1,1);
 yf0 = zeros(gP-1,1);
@@ -125,15 +125,15 @@ init = [y0' ym0' uf0' yf0' theta0' zeta0']';
 gamma = gamma_2*eye(2*gP);
 
 % Simulation
-[T_2,X_2] = ode23s('mrac',tfinal,init,'');
+[T_2,X_2] = ode23s('mrac',tfinal,init,options);
 y_2      = X_2(:,1);
 ym_2     = X_2(:,gP + 1);
-theta_2 =  X_2(:,3*gP + gPm - 1:gP+gPm+gP-1+gP-1+2*gP);
+theta_2 =  X_2(:,3*gP+gPm-1:5*gP+gPm-2);
 tiltheta_2 = theta_2 - thetas.*ones(length(theta_2),2*gP);
 modtt_2 = sqrt(sum(theta_2.^2,2));
 e0_2 =  y_2 - ym_2;
 r_2 = 0;
-for i=1:gP
+for i=1:length(A)
     r_2 = r_2 + A(i)*sin(w(i).*T_2);
 end
 
@@ -177,7 +177,7 @@ Ao = ss_o.A';
 Bo = ss_o.C';
 
 % Initialization
-y0  = y0_1;
+y0 = y0_1*ones(gP,1);
 ym0 = zeros(gPm,1);
 uf0 = zeros(gP-1,1);
 yf0 = zeros(gP-1,1);
@@ -189,15 +189,15 @@ init = [y0' ym0' uf0' yf0' theta0' zeta0']';
 gamma = gamma_1*eye(2*gP);
 
 % Simulation
-[T_2,X_2] = ode23s('mrac',tfinal,init,'');
+[T_2,X_2] = ode23s('mrac',tfinal,init,options);
 y_2      = X_2(:,1);
 ym_2     = X_2(:,gP + 1);
-theta_2 =  X_2(:,3*gP + gPm - 1:gP+gPm+gP-1+gP-1+2*gP);
+theta_2 =  X_2(:,3*gP+gPm-1:5*gP+gPm-2);
 tiltheta_2 = theta_2 - thetas.*ones(length(theta_2),2*gP);
 modtt_2 = sqrt(sum(theta_2.^2,2));
 e0_2 =  y_2 - ym_2;
 r_2 = 0;
-for i=1:gP
+for i=1:length(A)
     r_2 = r_2 + A(i)*sin(w(i).*T_2);
 end
 
@@ -241,7 +241,7 @@ Ao = ss_o.A';
 Bo = ss_o.C';
 
 % Initialization
-y0  = y0_1;
+y0 = y0_1*ones(gP,1);
 ym0 = zeros(gPm,1);
 uf0 = zeros(gP-1,1);
 yf0 = zeros(gP-1,1);
@@ -253,15 +253,15 @@ init = [y0' ym0' uf0' yf0' theta0' zeta0']';
 gamma = gamma_1*eye(2*gP);
 
 % Simulation
-[T_2,X_2] = ode23s('mrac',tfinal,init,'');
+[T_2,X_2] = ode23s('mrac',tfinal,init,options);
 y_2      = X_2(:,1);
 ym_2     = X_2(:,gP + 1);
-theta_2 =  X_2(:,3*gP + gPm - 1:gP+gPm+gP-1+gP-1+2*gP);
+theta_2 =  X_2(:,3*gP+gPm-1:5*gP+gPm-2);
 tiltheta_2 = theta_2 - thetas.*ones(length(theta_2),2*gP);
 modtt_2 = sqrt(sum(theta_2.^2,2));
 e0_2 =  y_2 - ym_2;
 r_2 = 0;
-for i=1:gP
+for i=1:length(A)
     r_2 = r_2 + A(i)*sin(w(i).*T_2);
 end
 
@@ -275,7 +275,7 @@ P = P_1; % Plant parameters
 kp = kp_1;
 gP = gP_1;
 Pm = Pm_1; %Model parameters
-gPm = gPm_2;
+gPm = gPm_1;
 
 [t1, tn, t2, t2n, L] = find2DOFparameters(P,Pm,A0); %Find ideal thetas and filter
 thetas = [t1, tn, t2, t2n];
@@ -305,7 +305,7 @@ Ao = ss_o.A';
 Bo = ss_o.C';
 
 % Initialization
-y0  = y0_2;
+y0 = y0_2*ones(gP,1);
 ym0 = zeros(gPm,1);
 uf0 = zeros(gP-1,1);
 yf0 = zeros(gP-1,1);
@@ -317,15 +317,15 @@ init = [y0' ym0' uf0' yf0' theta0' zeta0']';
 gamma = gamma_1*eye(2*gP);
 
 % Simulation
-[T_2,X_2] = ode23s('mrac',tfinal,init,'');
+[T_2,X_2] = ode23s('mrac',tfinal,init,options);
 y_2      = X_2(:,1);
 ym_2     = X_2(:,gP + 1);
-theta_2 =  X_2(:,3*gP + gPm - 1:gP+gPm+gP-1+gP-1+2*gP);
+theta_2 =  X_2(:,3*gP+gPm-1:5*gP+gPm-2);
 tiltheta_2 = theta_2 - thetas.*ones(length(theta_2),2*gP);
 modtt_2 = sqrt(sum(theta_2.^2,2));
 e0_2 =  y_2 - ym_2;
 r_2 = 0;
-for i=1:gP
+for i=1:length(A)
     r_2 = r_2 + A(i)*sin(w(i).*T_2);
 end
 
