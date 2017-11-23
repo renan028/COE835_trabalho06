@@ -9,7 +9,7 @@ PRINT = true;
 %% 2nd order system
 
 %Simulation time
-tfinal = 100;
+tfinal = 500;
 
 %Reference
 w = [2 3];
@@ -43,7 +43,7 @@ gPm_1 = length(Dm_1)-1;
 y0_1  = 0;
 
 %Adaptation gain
-gamma_1 = 100;
+gamma_1 = 20;
 
 %--------------- Second set of parameters ----------------
 
@@ -65,14 +65,14 @@ gPm_2 = length(Dm_2)-1;
 y0_2  = 10;
 
 %Adaptation gain
-gamma_2 = 10;
+gamma_2 = 1;
 
 run sim_mrac.m;
 
 %% 3rd order system
 
 %Simulation time
-tfinal = 100;
+tfinal = 500;
 
 %Reference
 w = [2 3 5];
@@ -83,6 +83,8 @@ A(3) = 10;
 
 %Observer
 A0 = tf([1 1],[1]);
+
+%Monopoli multiplier
 Li = [1 1.2];
 
 %--------------- First set of parameters ----------------
@@ -105,7 +107,7 @@ gPm_1 = length(Dm_1)-1;
 y0_1  = 0;
 
 %Adaptation gain
-gamma_1 = 250;
+gamma_1 = 20;
 
 %--------------- Second set of parameters ----------------
 
@@ -127,6 +129,6 @@ gPm_2 = length(Dm_2)-1;
 y0_2  = 10;
 
 %Adaptation gain
-gamma_2 = 100;
+gamma_2 = 1;
 
 run sim_mrac.m;
