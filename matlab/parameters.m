@@ -43,7 +43,7 @@ gPm_1 = length(Dm_1)-1;
 y0_1  = 0;
 
 %Adaptation gain
-gamma_1 = 20;
+gamma_1 = 200;
 
 %--------------- Second set of parameters ----------------
 
@@ -65,7 +65,7 @@ gPm_2 = length(Dm_2)-1;
 y0_2  = 10;
 
 %Adaptation gain
-gamma_2 = 1;
+gamma_2 = 20;
 
 run sim_mrac.m;
 
@@ -107,7 +107,7 @@ gPm_1 = length(Dm_1)-1;
 y0_1  = 0;
 
 %Adaptation gain
-gamma_1 = 20;
+gamma_1 = 200;
 
 %--------------- Second set of parameters ----------------
 
@@ -129,6 +129,6 @@ gPm_2 = length(Dm_2)-1;
 y0_2  = 10;
 
 %Adaptation gain
-gamma_2 = 1;
+gamma_2 = 20;
 
 run sim_mrac.m;

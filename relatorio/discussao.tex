@@ -1,2 +1,13 @@
 %---------------------------------------------------------------------
 \section{Discussão}
+
+Os resultados apresentados neste trabalho são semelhantes aos apresentados nos trabalhos anteriores sobre MRAC, só que aplicado a sistemas de primeira ordem. Neste trabalho, são abordados sistemas de segunda e terceira ordens com grau relativo 2. O polinômio $A_0(s)$ foi definido como $s+1$ e o multiplicador de Monopoli como $L(s) = s+1.5$ para todas as simulações. Os sinais de referência foram escolhidos de modo a ter o número de frequências necessárias para haver excitação persistente.
+
+A \textbf{simulação \#1} mostra o comportamento do sistema para variações no
+ganho de adaptação $\Gamma$. Para o sistema de $2^a$ ordem escolhido, um ganho maior resultou em uma estimação mais rápida dos parâmetros, convergindo para os reais. Para o sistema de $3^a$ ordem, o desempenho foi semelhante entre os dois ganhos, e em ambos os casos o vetor de parâmetros entrou em quadratura com o regressor. No entanto, os erros de saída convergiram para zero em todos os casos.
+
+A \textbf{simulação \#2} mostra o comportamento do sistema para variações na condição inicial $y(0)$. Como previsto, condições iniciais da planta mais longe em relação às condições iniciais do modelo de referência resultam em um transitório muito maior, o que é um problema conhecido de controle adaptativo.
+
+A \textbf{simulação \#3} apresenta o comportamento do sistema para variações na função de transferência da planta $P(s)$. Nota-se que o controle encontra maior dificuldade em fazer uma planta com dinâmica mais rápida rastrear um modelo de referência mais lento.
+
+Finalmente, na \textbf{simulação \#4}, os modelos de referência $P_m(s)$ foram variados e verificou-se que, escolhendo um modelo de referência com dinâmica mais rápida, a convergência é mais lenta para a planta de segunda ordem. Já para a planta de terceira ordem, a convergência foi mais rápida para o modelo de referência com dinâmica mais rápida.

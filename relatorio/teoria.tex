@@ -1,5 +1,5 @@
 %---------------------------------------------------------------------
-\section{MRAC direto para plantas de grau relativo 2}
+\section{MRAC direto ($n^* = 2$)}
 
 Uma das principais hipóteses utilizadas na demonstração de estabilidade do algoritmo MRAC direto para plantas de $n^* = 1$ é a 
 necessidade do modelo de referencia escolhido ser uma função de transferência SPR. Isto é necessário para que a lei de adaptação 
@@ -35,7 +35,7 @@ u(t) = \theta^\intercal\omega + \dot{\theta}^\intercal\omega
 \end{equation}
 %
 garantem a estabilidade assintótica dos erros de estimação e saída do sistema realimentado. Note que o sinal $\dot{\theta}$ presente em \eqref{eq:control} pode ser implementado na prática devido à sua definição na lei de adaptação \eqref{eq:adaptation}. Substituindo \eqref{eq:adaptation} em \eqref{eq:control}, a forma completa da lei de controle é dada por:
-
+%
 \begin{equation}
 u(t) = \theta^\intercal\omega - \textrm{sign}[k_p] \, \Gamma \, e(t) \, \zeta^{\intercal}\omega
 \label{eq:control2}
